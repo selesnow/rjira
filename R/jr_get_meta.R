@@ -10,7 +10,7 @@ jr_get_createmeta <- function() {
   jr_check_auth()
 
   res <- jr_make_request('issue/createmeta') %>%
-         .$projects %>%
+         purrr::pluck('projects') %>%
          jr_simple_parse()
 
   return(res)

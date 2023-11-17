@@ -22,3 +22,14 @@ Search for issues using JQL
 \details{
 You can see details \href{https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-post}{this link}
 }
+\examples{
+\dontrun{
+issues <- jr_issue_search(jql =
+'
+ (updated >= startOfDay("-3d") AND updated <= endOfDay("-3d"))
+  OR
+ (created >= startOfDay("-3d") AND created <= endOfDay("-3d"))
+ '
+)
+}
+}

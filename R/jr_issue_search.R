@@ -10,7 +10,16 @@
 #'
 #' @return tibble with search result
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' issues <- jr_issue_search(jql =
+#' '
+#'  (updated >= startOfDay("-3d") AND updated <= endOfDay("-3d"))
+#'   OR
+#'  (created >= startOfDay("-3d") AND created <= endOfDay("-3d"))
+#'  '
+#' )
+#' }
 jr_issue_search <- function(
     fields = '*all',
     expand = c('schema', 'names'),
@@ -44,9 +53,9 @@ jr_issue_search <- function(
     )
 
     issues <- tibble(issue = list(resp$issues)) %>%
-      unnest_longer(issue) %>%
-      unnest_wider(issue) %>%
-      unnest_wider(fields)
+      unnest_longer('issue') %>%
+      unnest_wider('issue') %>%
+      unnest_wider('fields')
 
     result <- append(result, list(issues))
 

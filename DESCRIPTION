@@ -16,7 +16,9 @@ Imports:
     cli,
     dplyr,
     httr2,
+    pbapply,
     purrr,
     snakecase,
     stringr,
-    tidyr
+    tidyr,
+    urltools
