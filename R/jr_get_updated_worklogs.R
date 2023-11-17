@@ -15,12 +15,13 @@
 #' }
 jr_get_updated_worklogs <- function(
     since,
-    expand          = 'properties'
+    expand = 'properties'
 ) {
+
 
   # convert to unix timestamp
   if (!is.null(since)) {
-    since  <- as.POSIXct(str_glue('{as.Date(since)} 00:00:00')) %>% as.numeric() * 1000
+    since  <- as.POSIXct(since) %>% as.numeric() * 1000
   }
 
   # pagination
