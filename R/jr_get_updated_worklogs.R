@@ -38,12 +38,16 @@ jr_get_updated_worklogs <- function(
       )
     )
 
-    worklogs <- tibble(worklogs = list(resp$values)) %>%
-      unnest_longer('worklogs') %>%
-      unnest_wider('worklogs') %>%
-      rename_with(to_snake_case)
+    if (length(resp$values) > 0) {
 
-    result <- append(result, list(worklogs))
+      worklogs <- tibble(worklogs = list(resp$values)) %>%
+        unnest_longer('worklogs') %>%
+        unnest_wider('worklogs') %>%
+        rename_with(to_snake_case)
+
+      result <- append(result, list(worklogs))
+
+    }
 
     lastPage <- resp$lastPage
     if (!lastPage) {
