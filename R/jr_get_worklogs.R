@@ -39,6 +39,10 @@ jr_get_worklogs_helper <- function(
     expand = 'properties'
 ) {
 
+  if (length(ids)==1) {
+    ids <- list(ids)
+  }
+
   resp <- jr_make_request(
     path = str_glue('worklog/list'),
     params = list(
