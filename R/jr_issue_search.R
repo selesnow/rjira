@@ -39,7 +39,7 @@ jr_issue_search <- function(
   total    <- NULL
   result   <- list()
 
-  while ( is.null(total) || start_at <= total ) {
+  while ( is.null(total) || start_at < total ) {
 
     resp <- jr_make_request(
       path = 'search',
