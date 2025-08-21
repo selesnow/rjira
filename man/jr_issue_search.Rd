@@ -20,7 +20,7 @@ tibble with search result
 Search for issues using JQL
 }
 \details{
-You can see details \href{https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-post}{this link}
+You can see details \href{https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-jql-post}{this link}
 }
 \examples{
 \dontrun{

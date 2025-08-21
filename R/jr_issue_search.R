@@ -5,7 +5,7 @@
 #' @param jql A JQL expression. See [documentation](https://confluence.atlassian.com/x/egORLQ)
 #'
 #' @details
-#' You can see details [this link](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-post)
+#' You can see details [this link](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-jql-post)
 #'
 #'
 #' @return tibble with search result
@@ -30,25 +30,25 @@ jr_issue_search <- function(
     fields <- as.list(fields)
   }
 
-  if (length(expand) == 1) {
-    expand <- as.list(expand)
+  if (length(expand) > 1) {
+    expand <- paste0(expand, collapse = ',')
   }
 
   # pagination
-  start_at <- 0
-  total    <- NULL
-  result   <- list()
+  nextPageToken <- NULL
+  isLast        <- FALSE
+  result        <- list()
 
-  while ( is.null(total) || start_at < total ) {
+  while ( !isLast ) {
 
     resp <- jr_make_request(
-      path = 'search',
+      path = 'search/jql',
       body = list(
-        jql        = jql,
-        startAt    = start_at,
-        maxResults = 100,
-        fields     = fields,
-        expand     = expand
+        jql           = jql,
+        nextPageToken = nextPageToken,
+        maxResults    = 500,
+        fields        = fields,
+        expand        = expand
       )
     )
 
@@ -59,11 +59,8 @@ jr_issue_search <- function(
 
     result <- append(result, list(issues))
 
-    start_at <- start_at + 100
-
-    if ( is.null(total) ) {
-      total    <- resp$total
-    }
+    nextPageToken <- resp$nextPageToken
+    isLast        <- resp$isLast
 
   }
 

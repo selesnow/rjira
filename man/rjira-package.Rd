@@ -2,7 +2,6 @@
 % Please edit documentation in R/rjira-package.R, R/rjira_package.R
 \docType{package}
 \name{rjira-package}
-\alias{rjira}
 \alias{rjira-package}
 \title{rjira: Work with Jira API}
 \description{
