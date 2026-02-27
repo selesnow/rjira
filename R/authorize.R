@@ -45,10 +45,14 @@ jr_get_base_url <- function() {
 
 jr_check_auth <- function() {
 
-  if (jr_get_token() != ""||jr_get_user != ""||jr_get_base_url != "") {
+  has_token <- nzchar(jr_get_token())
+  has_user <- nzchar(jr_get_user())
+  has_base_url <- nzchar(jr_get_base_url())
+
+  if (has_token && has_user && has_base_url) {
     return(TRUE)
-  } else {
-    stop("You need authorize, please use jr_authorize() function, after repeat this call")
   }
+
+  stop("You need authorize, please use jr_authorize() function, after repeat this call")
 
 }
