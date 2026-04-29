@@ -47,6 +47,7 @@ jr_check_auth <- function() {
 
   has_token <- nzchar(jr_get_token())
   has_user <- nzchar(jr_get_user())
+  jr_set_url(jr_get_url())
   has_base_url <- nzchar(jr_get_base_url())
 
   if (has_token && has_user && has_base_url) {
